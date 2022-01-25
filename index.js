@@ -41,6 +41,15 @@ let GameBoard = (() => {
     else return false;
   };
 
+  const checkBoardFilled = _ => {
+    for (i = 0; i < boardCells.length; i++) {
+      if (!checkCellFilled(i)) {
+        return false;
+      };
+    }
+    return true;
+  }
+
   const modifyCell = (string, cellIndex) => {
     boardCells[cellIndex] = string;
   };
@@ -74,13 +83,13 @@ let GameBoard = (() => {
         boardCells[parseInt(winConditions[i].charAt(1))] &&
         boardCells[parseInt(winConditions[i].charAt(1))] ===
         boardCells[parseInt(winConditions[i].charAt(2))]) {
-          if (boardCells[parseInt(winConditions[i].charAt(0))] === '') {
-            break;
-          }
-          win = true;
-          winner = boardCells[parseInt(winConditions[i].charAt(0))];
-          whoWon = winner;
+        if (boardCells[parseInt(winConditions[i].charAt(0))] === '') {
+          break;
         }
+        win = true;
+        winner = boardCells[parseInt(winConditions[i].charAt(0))];
+        whoWon = winner;
+      }
     }
     return win;
   };
@@ -89,7 +98,7 @@ let GameBoard = (() => {
     return whoWon;
   };
 
-  return {modifyCell, getCells, checkCellFilled, checkGameOver, getWinner};
+  return { modifyCell, getCells, checkCellFilled, checkGameOver, getWinner, checkBoardFilled };
 
 })();
 
@@ -137,7 +146,20 @@ let Game = (() => {
 
     GameDisplay.updateBoard(GameBoard.getCells());
 
-    console.log(GameBoard.checkGameOver());
+    if (GameBoard.checkGameOver()) {
+      let winner = "Player 1";
+
+      if (GameBoard.getWinner() === "O") {
+        winner = "Player 2";
+      }
+
+      window.alert(`${winner} wins!`);
+      location.reload();
+    }
+    else if (GameBoard.checkBoardFilled()) {
+      window.alert('It\'s a tie!');
+      location.reload();
+    }
 
   };
 
