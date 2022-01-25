@@ -7,9 +7,18 @@ body * {
   margin: 0;
 }
 
+.game-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+margin-top: 50px;
+}
+
+
 .grid-container {
   border: 1px solid black;
-  max-width: 500px;
+  width: 500px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
