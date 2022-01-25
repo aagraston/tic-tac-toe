@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+}
+
+body * {
+  margin: 0;
+}
+
+.grid-container {
+  max-width: 500px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+.grid-cell {
+  box-sizing: border-box;
+  border: 1px solid black;
+  flex-basis: 33.333%;
+}
+
+.grid-cell:before {
+  content: '';
+  padding-top: 100%;
+  display: block;
+}
